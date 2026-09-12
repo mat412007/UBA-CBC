@@ -63,16 +63,47 @@ def limpieza(bosque):
 
 # ---------------------------------
 
+def dinamica(f, a, n, p):
+    bosque = generar_bosque(n) # Generamos el bosque
+    arboles = [0]*a
 
+    for i in range(a): 
+        brotes(bosque, p) # Brote con probabilidad p
+
+        rayos(bosque, f) # Rayo con probabilidad f
+
+        propagar(bosque) # Propagacion del fuego
+
+        limpieza(bosque) # Limpieza de arboles quemados
+
+        for a in range(len(bosque)):
+            if(bosque[a] == 1):
+                arboles[i] += 1
+
+    return round((sum(arboles)/a), 2) # Redondeamos el promedio de arboles sobrevivientes
 
 # ---------------------------------
 
-bosque = generar_bosque(10)
+def arboles_sobrevivientes(f, a, n):
+    sobrevivientes = []
+    for p in np.arange(0, 1.01, 0.01):
+        sobrevivientes.append(dinamica(f, a, n, p))
 
-brotes(bosque, 0.4) 
+    return sobrevivientes
 
-rayos(bosque, 0.2)
+# ---------------------------------
 
-propagar(bosque)
+def p_optimo(f, a, n):
+    sobrevivientes = arboles_sobrevivientes(f, a, n)
+    i_optimo = 0
+    maximo = 0
+    for i in range(len(sobrevivientes)):
+        if(sobrevivientes[i] > maximo):
+            maximo = sobrevivientes[i]
+            i_optimo = i
 
-limpieza(bosque)
+    return (0.01*i_optimo) 
+
+# ---------------------------------
+
+print(p_optimo(0.3, 5, 10))

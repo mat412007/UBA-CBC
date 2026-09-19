@@ -30,62 +30,37 @@ def vecinos(bosque, pos): # Bosque es un array 2D, y pos una tupla de 2 valores
     filas, columnas = bosque.shape
     f, c = pos
 
-    if c == 0: # Vecinos de fila
-        v.append((f, c+1))
-    elif c == columnas-1:
-        v.append((f, c-1))
-    else:
-        v.append((f, c+1))
-        v.append((f, c-1))
+    f1 = f+1
+    if (f1) == filas:
+        f1 = 0
 
-    if f == 0: # Vecinos de columna
-        v.append((f+1, c))
-    elif f == filas-1:
-        v.append((f-1, c))
-    else:
-        v.append((f+1, c))
-        v.append((f-1, c))
-        
-    if f == 0 and c == 0: # Vecinos diagonales(Esquinas)
-        v.append((f+1, c+1))
-    elif f == 0 and c == columnas-1:
-        v.append((f+1, c-1))
-    elif f == filas-1 and c == 0:
-        v.append((f-1, c+1))
-    elif f == filas-1 and c == columnas-1:
-        v.append((f-1, c-1))
-        
-    if f == 0: # Vecinos diagonales(Bordes horizontales)
-        v.append((f+1, c+1))
-        v.append((f+1, c-1))
-    elif f == filas-1:
-        v.append((f-1, c+1))
-        v.append((f-1, c-1))
-        
-    if c == 0: # # Vecinos diagonales(Bordes verticales)
-        v.append((f+1, c+1))
-        v.append((f-1, c+1))
-    elif c == columnas-1:
-        v.append((f+1, c-1))
-        v.append((f-1, c-1))
-        
-    if (c != 0 and c != columnas-1) and (f != 0 and f != filas-1):
-        v.append((f+1, c-1))
-        v.append((f-1, c-1))
-        v.append((f+1, c+1))
-        v.append((f-1, c+1))
+    c1 = c+1
+    if (c1) == columnas:
+        c1 = 0
+
+    f2 = f-1
+    if (f2) < 0:
+        f2 = filas-1
+
+    c2 = c-1
+    if (c2) < 0:
+        c2 = columnas-1
+
+    v.append((f, c1)) # 8 vecinos
+    v.append((f, c2))
+    v.append((f1, c))
+    v.append((f2, c))
+    v.append((f1, c1))
+    v.append((f2, c2))
+    v.append((f1, c2))
+    v.append((f2, c1))
         
     return v
 
 # --------------------------------------------------
 
-bosque = generar_bosque(3, 5)
+bosque = generar_bosque(5, 5)
 #brotes(bosque, 0.4)
-contador = 1
-for i in range(len(bosque)):
-    for j in range(len(bosque[0])):
-        bosque[i][j] = contador
-        contador +=1
             
 print(bosque)
-print(vecinos(bosque, (1, 1)))
+print(vecinos(bosque, (4, 4)))

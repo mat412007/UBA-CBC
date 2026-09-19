@@ -1,6 +1,10 @@
 import random
 import numpy as np
-from Incendio import suceso_aleatorio
+
+def suceso_aleatorio(p): # Probabilidad de algo
+    return random.random() <= p
+
+# --------------------------------------------------
 
 def encontrar_indice(lista, valor):
     for i in range(len(lista)):
@@ -60,7 +64,7 @@ def vecinos(bosque, pos): # Bosque es un array 2D, y pos una tupla de 2 valores
 # --------------------------------------------------
 
 bosque = generar_bosque(5, 5)
-#brotes(bosque, 0.4)
             
-print(bosque)
 print(vecinos(bosque, (4, 4)))
+brotes(bosque, 0.4)
+print(bosque)

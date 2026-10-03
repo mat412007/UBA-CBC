@@ -97,9 +97,9 @@ def limpieza(bosque):
 
 def dinamica(n, m, p, f, a):
     sobrevivientes = [0]*a
+    bosque = generar_bosque(n, m)
     for x in range(a):
         arboles = 0
-        bosque = generar_bosque(n, m)
         brotes(bosque, p)
         rayos(bosque, f)
         propagar(bosque)
@@ -130,12 +130,22 @@ def p_optimo(n, m, f, a):
     indice = 0
     for i in range(101):
         if(sobrevivientes[i] > maximo):
+            maximo = sobrevivientes[i]
             indice = i
-    return  0 + (0.01*indice)
+    return  indice*0.01
 
 # --------------------------------------------------
 
-print(p_optimo(10, 10, 0.2, 5)) # 5 años
+print(p_optimo(11, 11, 0.1, 50)) # 5 años
 
-#visualizar_bosque(bosque)
-            
+sobrevivientes = arboles_sobrevivientes(11, 11, 0.1, 500)
+plt.plot( np.arange(0, 1.01, 0.01), sobrevivientes)
+
+"""
+Yo pienso que esa diferencia se debe a una regla de lógica que aplica para el 2D.
+Debido a su doble dimensión, y a la función propagar_vecinos, eso hace muy fácil la propagación de fuego en los árboles.
+Esto hace que mientras menos árboles tenga el bosque, ,ás probabilidad hay de que sobrevivan; 
+si hay muchos árboles, el fuego se les propaga a todos y ninguno sobrevive.
+En el de 1D, si hay un 0 que separe grupos de árboles, eso basta para que el fuego no se propague, 
+y hace que su mejor probabilidad de brote sea menos estable, y dependa más de la ubicación de donde caigan los rayos.
+"""

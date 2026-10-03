@@ -34,21 +34,13 @@ def vecinos(bosque, pos): # Bosque es un array 2D, y pos una tupla de 2 valores
     filas, columnas = bosque.shape
     f, c = pos
 
-    f1 = f+1
-    if (f1) == filas:
-        f1 = 0
+    f1 = (f+1) % len(bosque)
 
-    c1 = c+1
-    if (c1) == columnas:
-        c1 = 0
+    c1 = (c+1) % len(bosque[0])
 
-    f2 = f-1
-    if (f2) < 0:
-        f2 = filas-1
+    f2 = (f-1) % len(bosque)
 
-    c2 = c-1
-    if (c2) < 0:
-        c2 = columnas-1
+    c2 = (c-1) % len(bosque[0])
 
     v.append((f, c1)) # 8 vecinos
     v.append((f, c2))
@@ -57,7 +49,7 @@ def vecinos(bosque, pos): # Bosque es un array 2D, y pos una tupla de 2 valores
     v.append((f1, c1))
     v.append((f2, c2))
     v.append((f1, c2))
-    v.append((f2, c1))
+    v.append((f2, c1)) 
         
     return v
 

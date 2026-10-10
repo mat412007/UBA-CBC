@@ -103,11 +103,8 @@ def crear_codificacion(palabra, alfabeto):
 
     return dict(zip(alfabeto, valores))
 
-
 # --------------------------------------------
 
 alf = "abcdefghijklmnñopqrstuvwxyz"
-mensaje = "La conclusion: perdieron"
 dicc = crear_diccionario_cesar(alf, 3)
-
 print(crear_codificacion("catapulta", alf))

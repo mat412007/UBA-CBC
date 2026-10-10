@@ -52,7 +52,28 @@ def codificar(mensaje, diccionario):
         
 # --------------------------------------------
 
+def crear_diccionario_invertido(diccionario):
+    llaves = diccionario.keys()
+    valores = diccionario.values()
+    return dict(zip(valores, llaves))
+
+# --------------------------------------------
+
+def decodificar(mensaje, diccionario):
+    mensaje = normalizar(mensaje)
+    dicc_inv = crear_diccionario_invertido(diccionario)
+    codigo = ""
+    for c in mensaje:  
+        if(c in dicc_inv.keys()):
+            codigo += dicc_inv[c]
+        else:
+            codigo += c
+
+    return codigo
+
+# --------------------------------------------
+
 alf = "abcdefghijklmnñopqrstuvwxyz"
 mensaje = "La conclusion: perdieron"
-dicc = crear_diccionario_cesar(alf, 10)
-print(codificar(mensaje, dicc))
+dicc = crear_diccionario_cesar(alf, 3)
+

@@ -99,9 +99,7 @@ def crear_codificacion(palabra, alfabeto):
     palabra2 = sin_repetidos(palabra) 
     alf2 = quitar(palabra2, alfabeto) 
     val = palabra2 + alf2
-    valores = [0]*len(val)
-    for i in range(len(valores)):
-        valores[i] = val[i]
+    valores = list(val)
 
     return dict(zip(alfabeto, valores))
 

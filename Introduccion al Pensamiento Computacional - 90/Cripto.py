@@ -73,7 +73,43 @@ def decodificar(mensaje, diccionario):
 
 # --------------------------------------------
 
+def quitar(caracteres, cadena):
+    cadena2 = ""
+    for i in cadena:
+        if i not in caracteres:
+            cadena2 += i
+
+    return cadena2
+
+# --------------------------------------------
+
+def sin_repetidos(cadena):
+    cadena2 = ""
+    repetidos = []
+    for i in cadena:
+        if i not in repetidos:
+            repetidos.append(i)
+            cadena2 += i
+
+    return cadena2
+
+# --------------------------------------------
+
+def crear_codificacion(palabra, alfabeto):
+    palabra2 = sin_repetidos(palabra) 
+    alf2 = quitar(palabra2, alfabeto) 
+    val = palabra2 + alf2
+    valores = [0]*len(val)
+    for i in range(len(valores)):
+        valores[i] = val[i]
+
+    return dict(zip(alfabeto, valores))
+
+
+# --------------------------------------------
+
 alf = "abcdefghijklmnñopqrstuvwxyz"
 mensaje = "La conclusion: perdieron"
 dicc = crear_diccionario_cesar(alf, 3)
 
+print(crear_codificacion("catapulta", alf))

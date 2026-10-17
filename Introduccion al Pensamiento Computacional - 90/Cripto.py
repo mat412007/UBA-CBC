@@ -107,4 +107,4 @@ def crear_codificacion(palabra, alfabeto):
 
 alf = "abcdefghijklmnñopqrstuvwxyz"
 dicc = crear_diccionario_cesar(alf, 3)
-print(crear_codificacion("catapulta", alf))
+#print(crear_codificacion("catapulta", alf))

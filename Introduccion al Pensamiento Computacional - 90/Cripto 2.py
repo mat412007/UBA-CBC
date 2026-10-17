@@ -1,4 +1,5 @@
 import Cripto as c1
+import matplotlib.pyplot as plt
 
 def leer_archivo(nombre):
     archivo = open(nombre, encoding = "utf-8")
@@ -58,6 +59,19 @@ def coincidencias_por_k(mensaje_codificado, palabras_comunes, alfabeto):
 
 # ------------------------------------------
 
+def k_optimo(mensaje_codificado, palabras_comunes, alfabeto):
+    maximo = 0
+    indice = 0
+    coincidencias = coincidencias_por_k(mensaje_codificado, palabras_comunes, alfabeto)
+    for c in range(len(coincidencias)):
+        if coincidencias[c] > maximo:
+            maximo = coincidencias[c]
+            indice = c
+            
+    return indice
+    
+# ------------------------------------------
+
 alf = "abcdefghijklmnñopqrstuvwxyz"
 dicc = {'a':'1','b':'9','c':'2','d':'-'} 
 codificar_archivo_con_dicc("original.txt", dicc)
@@ -70,4 +84,5 @@ cant = contar_coincidencias(['hola','soy','una','lista'], ['hola','soy','lista',
 
 palabras_comunes = leer_archivo('palabras')
 palabras_comunes = c1.normalizar(palabras_comunes)
-print(coincidencias_por_k("Mica y Claudia toman mate", palabras_comunes, alf))
+dic10 = c1.crear_diccionario_cesar(alf,10)
+print(k_optimo(c1.codificar("el arte de programar!",dic10), palabras_comunes , alf))

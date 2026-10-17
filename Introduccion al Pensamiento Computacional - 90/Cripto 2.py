@@ -88,6 +88,16 @@ def decodificar_mensaje(archivo_codificado, archivo_palabras, alfabeto):
     
 # ------------------------------------------
 
+def graficar_k(lista_coincidencias):
+    Ks = [0]*27
+    for i in range(len(Ks)):
+        Ks[i] = i
+    
+    plt.bar(Ks, height=lista_coincidencias)
+    plt.show()
+
+# ------------------------------------------
+
 alf = "abcdefghijklmnñopqrstuvwxyz"
 dicc = {'a':'1','b':'9','c':'2','d':'-'} 
 codificar_archivo_con_dicc("original.txt", dicc)
@@ -101,6 +111,9 @@ cant = contar_coincidencias(['hola','soy','una','lista'], ['hola','soy','lista',
 palabras_comunes = leer_archivo('palabras')
 palabras_comunes = c1.normalizar(palabras_comunes)
 dic10 = c1.crear_diccionario_cesar(alf,10)
-print(k_optimo(c1.codificar("el arte de programar!",dic10), palabras_comunes , alf))
+#print(k_optimo(c1.codificar("el arte de programar!",dic10), palabras_comunes , alf))
 
 decodificar_mensaje("decodificame.enc", "palabras", alf)
+
+
+graficar_k(coincidencias_por_k(leer_archivo("decodificame.enc"), palabras_comunes, alf))

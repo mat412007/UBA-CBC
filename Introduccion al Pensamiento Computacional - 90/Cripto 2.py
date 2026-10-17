@@ -72,6 +72,22 @@ def k_optimo(mensaje_codificado, palabras_comunes, alfabeto):
     
 # ------------------------------------------
 
+def decodificar_mensaje(archivo_codificado, archivo_palabras, alfabeto):
+    archivo = open(archivo_codificado, encoding = "utf-8")
+    mensaje_codificado = archivo.read()
+    archivo = open(archivo_palabras, encoding = "utf-8")
+    palabras_comunes = archivo.read()
+    archivo.close()
+    
+    mejor_k = k_optimo(mensaje_codificado, palabras_comunes, alfabeto)
+    dicc = c1.crear_diccionario_cesar(alfabeto, mejor_k)
+    mensaje_decodificado = c1.decodificar(mensaje_codificado, dicc)
+    archivo = open("Decodificacion.dec", "w")
+    archivo.write(mensaje_decodificado)
+    archivo.close()
+    
+# ------------------------------------------
+
 alf = "abcdefghijklmnñopqrstuvwxyz"
 dicc = {'a':'1','b':'9','c':'2','d':'-'} 
 codificar_archivo_con_dicc("original.txt", dicc)
@@ -86,3 +102,5 @@ palabras_comunes = leer_archivo('palabras')
 palabras_comunes = c1.normalizar(palabras_comunes)
 dic10 = c1.crear_diccionario_cesar(alf,10)
 print(k_optimo(c1.codificar("el arte de programar!",dic10), palabras_comunes , alf))
+
+decodificar_mensaje("decodificame.enc", "palabras", alf)
